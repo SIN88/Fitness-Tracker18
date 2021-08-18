@@ -1,0 +1,23 @@
+{
+  "name": "18fitness-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SIN88/Fitness-Tracker18.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SIN88/Fitness-Tracker18/issues"
+  },
+  "homepage": "https://github.com/SIN88/Fitness-Tracker18#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
