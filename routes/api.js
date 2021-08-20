@@ -8,10 +8,12 @@ router.get('/workouts', async (req, res) => {
         console.log(allWorkouts)
         res.json(allWorkouts);
         
-    } catch (error) {
+    })
+    
+    .catch((error) => {
         res.json(error)
-    }
-});
+    });
+
 router.post('/api/workouts', (req, res) => {
     Workout.create({})
       .then((dbWorkout) => {
