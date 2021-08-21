@@ -1,20 +1,5 @@
-// define calculateTotalDuration
-function calculateTotalDuration(data) {
-  const totalDuration = [];
-
-  data.forEach((workout) => {
-    const workoutTotal = workout.exercises.reduce((total, exercises) => {
-      return total + exercises.duration;
-    }, 0);
-
-    totalDuration.push(workoutTotal);
-  });
-
-  return totalDuration;
-}
-
 function calculateTotalWeight(data) {
-  const totalWeight = [];
+  const totals = [];
 
   data.forEach((workout) => {
     const workoutTotal = workout.exercises.reduce((total, { type, weight }) => {
@@ -24,16 +9,36 @@ function calculateTotalWeight(data) {
       return total;
     }, 0);
 
-    totalWeight.push(workoutTotal);
+    totals.push(workoutTotal);
   });
 
-  return totalWeight;
+  return totals;
+}
+
+// Calculate total duration
+function calculateTotalDuration(data) {
+  const totals = [];
+
+  data.forEach((workout) => {
+    const workoutDuration = workout.exercises.reduce((total, { type, duration}) => {
+      if (type === 'resistance' || type === 'cardio') {
+        return total + duration;
+      }
+      return total;
+    }, 0);
+
+    totals.push(workoutDuration);
+  });
+
+  return totals;
 }
 
 function populateChart(data) {
-  // refactor durations to use new calculateTotalDurations function
+  // const durations = data.map(({ totalDuration }) => totalDuration);
   const durations = calculateTotalDuration(data);
   const pounds = calculateTotalWeight(data);
+  console.log(`pounds: ${pounds}`)
+  console.log(durations)
 
   const line = document.querySelector('#canvas').getContext('2d');
   const bar = document.querySelector('#canvas2').getContext('2d');
@@ -56,8 +61,8 @@ function populateChart(data) {
       datasets: [
         {
           label: 'Workout Duration In Minutes',
-          backgroundColor: 'red',
-          borderColor: 'red',
+          backgroundColor: 'purple',
+          borderColor: 'puple',
           data: durations,
           fill: false,
         },
