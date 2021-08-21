@@ -1,19 +1,17 @@
 const router = require('express').Router();
 const Workout = require('../models/workout.js');
 
-//getting the workouts
-router.get('/workouts', async (req, res) => {
-    try {
-        const allWorkouts = await db.Workout.find({});
-        console.log(allWorkouts)
-        res.json(allWorkouts);
-        
-    })
-    
-    .catch((error) => {
-        res.json(error)
-    });
 
+router.get("/api/workouts", (req, res) => {
+    db.Workout.find({})
+      .then(dbWorkout => {
+        res.json(dbWorkout);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  })
+  
 router.post('/api/workouts', (req, res) => {
     Workout.create({})
       .then((dbWorkout) => {
