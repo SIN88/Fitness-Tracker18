@@ -1,5 +1,20 @@
+// define calculateTotalDuration
+function calculateTotalDuration(data) {
+  const totalDuration = [];
+
+  data.forEach((workout) => {
+    const workoutTotal = workout.exercises.reduce((total, exercises) => {
+      return total + exercises.duration;
+    }, 0);
+
+    totalDuration.push(workoutTotal);
+  });
+
+  return totalDuration;
+}
+
 function calculateTotalWeight(data) {
-  const total = [];
+  const totalWeight = [];
 
   data.forEach((workout) => {
     const workoutTotal = workout.exercises.reduce((total, { type, weight }) => {
@@ -9,26 +24,15 @@ function calculateTotalWeight(data) {
       return total;
     }, 0);
 
-    total.push(workoutTotal);
+    totalWeight.push(workoutTotal);
   });
 
-  return total;
+  return totalWeight;
 }
 
-function calculateTotalDuration(data) {
-  const totals = [];
-
-  data.forEach((workout) => {
-    const workoutTotal = workout.exercises.reduce((total, exercises) => {
-      return total + exercises.duration;
-    }, 0);
-    totals.push(workoutTotal)
-  });
-  return totals;
-}
 function populateChart(data) {
-  // const durations = data.map(({ totalDuration }) => totalDuration);
-  const durations = calculateTotalDuration(data)
+  // refactor durations to use new calculateTotalDurations function
+  const durations = calculateTotalDuration(data);
   const pounds = calculateTotalWeight(data);
 
   const line = document.querySelector('#canvas').getContext('2d');
